@@ -19,7 +19,7 @@ router.post("/", async (request,response) => {
         const { body } = request
         const koder = await create(body)
         response.status(201)
-        response.jason({
+        response.json({
             success: true,
             data:({
                 koder,
