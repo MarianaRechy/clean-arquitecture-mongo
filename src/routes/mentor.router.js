@@ -1,6 +1,8 @@
 const { Router, response, request } = require("express")
 const express = require("express")
 const app = require ("../server")
+const auth = require ("../middlewares/auth.middleware")
+
 
 const { 
     create,
@@ -12,6 +14,11 @@ const {
 
 //Haciendo router
 const router = express.Router()
+
+//router
+router.use(auth)
+
+
 
 //Endpoint de crear
 //mentors
@@ -41,7 +48,7 @@ router.post("/", async (request,response) => {
 module.exports = router
 
 
-router.get("/:id", async(request,response) =>{
+router.get("/:id", auth, async(request,response) =>{
     try{
         const { params } = request
         const mentor = await getMentor(params.id)
